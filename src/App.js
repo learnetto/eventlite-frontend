@@ -1,6 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 import Eventlite from './components/Eventlite'
 
 function App() {
@@ -8,7 +6,7 @@ function App() {
     <div className="App">
       <Eventlite />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

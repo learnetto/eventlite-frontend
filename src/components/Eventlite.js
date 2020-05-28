@@ -1,6 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
 import axios from 'axios'
 import validations from '../validations'
 
@@ -8,11 +6,13 @@ import EventsList from './EventsList'
 import EventForm from './EventForm'
 import FormErrors from './FormErrors'
 
+import './Eventlite.css'
+
 class Eventlite extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      events: this.props.events,
+      events: [],
       title: {value: '', valid: false},
       start_datetime: {value: '', valid: false},
       location: {value: '', valid: false},
@@ -35,6 +35,16 @@ class Eventlite extends React.Component {
     ]
   }
 
+  componentDidMount() {
+    axios({
+      method: 'GET',
+      url: 'http://localhost:3000/events'
+    })
+    .then(response => {
+      this.setState({events: response.data})
+    })
+  }
+
   handleInput = e => {
     e.preventDefault()
     const name = e.target.name
@@ -49,11 +59,8 @@ class Eventlite extends React.Component {
     let newEvent = { title: this.state.title.value, start_datetime: this.state.start_datetime.value, location: this.state.location.value }
     axios({
       method: 'POST',
-      url: '/events',
-      data: { event: newEvent },
-      headers: {
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
+      url: 'http://localhost:3000/events',
+      data: { event: newEvent }
     })
     .then(response => {
       this.addNewEvent(response.data)
@@ -119,17 +126,4 @@ class Eventlite extends React.Component {
   }
 }
 
-Eventlite.propTypes = {
-  events: PropTypes.array.isRequired
-}
-
 export default Eventlite
-
-document.addEventListener('DOMContentLoaded', () => {
-  const node = document.getElementById('events_data')
-  const data = JSON.parse(node.getAttribute('data'))
-  ReactDOM.render(
-    <Eventlite events={data} />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})

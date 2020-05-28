@@ -13,7 +13,7 @@ const validations = {
     if(Date.parse(time) > Date.now()) {
       return [true, ""]
     } else {
-      return [false, "can\'t be in the past"]
+      return [false, "can't be in the past"]
     }
   }
 }
