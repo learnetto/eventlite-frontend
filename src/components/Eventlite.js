@@ -38,7 +38,7 @@ class Eventlite extends React.Component {
   componentDidMount() {
     axios({
       method: 'GET',
-      url: 'http://localhost:3000/events'
+      url: 'http://localhost:3001/events'
     })
     .then(response => {
       this.setState({events: response.data})
@@ -59,7 +59,7 @@ class Eventlite extends React.Component {
     let newEvent = { title: this.state.title.value, start_datetime: this.state.start_datetime.value, location: this.state.location.value }
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/events',
+      url: 'http://localhost:3001/events',
       data: { event: newEvent }
     })
     .then(response => {
