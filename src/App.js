@@ -1,5 +1,6 @@
 import React from 'react'
 import Login from './components/Login'
+import Signup from './components/Signup'
 import AppHeader from './components/AppHeader'
 import Eventlite from './components/Eventlite'
 
@@ -12,7 +13,9 @@ function App() {
   return (
     <div className="App">
       <AppHeader />
-      {currentUser() ? <Eventlite /> : <Login />}
+      {currentUser() ?
+        <Eventlite /> :
+        <><Login /> <Signup /></>}
     </div>
   )
 }
