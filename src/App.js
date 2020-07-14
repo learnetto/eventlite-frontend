@@ -3,6 +3,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import AppHeader from './components/AppHeader'
 import Eventlite from './components/Eventlite'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const currentUser = function() {
   const user = localStorage.getItem('user')
@@ -11,12 +12,20 @@ const currentUser = function() {
 
 function App() {
   return (
-    <div className="App">
-      <AppHeader />
-      {currentUser() ?
-        <Eventlite /> :
-        <><Login /> <Signup /></>}
-    </div>
+    <Router>
+      <Route path="/">
+        <AppHeader />
+      </Route>
+      <Route exact path="/">
+        <Eventlite />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <Route exact path="/signup">
+        <Signup />
+      </Route>
+    </Router>
   )
 }
 
