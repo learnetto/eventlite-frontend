@@ -16,3 +16,9 @@ h2.event-title {
   color: #FD7E14;
   margin: 5px 0;
 }
+
+.event-description {
+  font-size: 24px;
+  color: #666;
+  margin: 40px 0;
+}
