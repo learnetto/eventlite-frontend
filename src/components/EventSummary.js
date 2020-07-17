@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const formatDate = datetime =>
   new Date(datetime).toDateString()
 
-const Event = props => (
+const EventSummary = props => (
   <div className="event">
     <h2 className="event-title">{props.event.title}</h2>
     <div className="event-datetime">{formatDate(props.event.start_datetime)}</div>
@@ -20,4 +20,4 @@ Event.propTypes = {
   })
 }
 
-export default Event
+export default EventSummary
