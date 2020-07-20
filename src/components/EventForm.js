@@ -12,7 +12,8 @@ class EventForm extends React.Component {
       start_datetime: {value: '', valid: false},
       location: {value: '', valid: false},
       formErrors: {},
-      formValid: false
+      formValid: false,
+      editing: false
     }
   }
 
@@ -29,6 +30,23 @@ class EventForm extends React.Component {
     ]
   }
 
+  componentDidMount () {
+    if(this.props.match) {
+      this.setState({editing: this.props.match.path === '/events/:id/edit'})
+      axios({
+        method: "GET",
+        url: `http://localhost:3001/events/${this.props.match.params.id}`,
+        headers: JSON.parse(localStorage.getItem('user'))
+      }).then((response) => {
+        this.setState({
+          title: {valid: true, value: response.data.title},
+          location: {valid: true, value: response.data.location},
+          start_datetime: {valid: true, value: new Date(response.data.start_datetime).toDateString()},
+        }, this.validateForm)
+      });
+    }
+  }
+
   handleInput = e => {
     e.preventDefault()
     const name = e.target.name
@@ -40,15 +58,21 @@ class EventForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    let newEvent = { title: this.state.title.value, start_datetime: this.state.start_datetime.value, location: this.state.location.value }
+
+    const event = { title: this.state.title.value, start_datetime: this.state.start_datetime.value, location: this.state.location.value }
+    const method = this.state.editing ? 'PUT' : 'POST'
+    const url = this.state.editing ? `http://localhost:3001/events/${this.props.match.params.id}` : 'http://localhost:3001/events'
+
     axios({
-      method: 'POST',
-      url: 'http://localhost:3001/events',
+      method: method,
+      url: url,
       headers: JSON.parse(localStorage.user),
-      data: { event: newEvent }
+      data: { event: event }
     })
     .then(response => {
-      this.addNewEvent(response.data)
+      if(!this.state.editing && this.props.onSuccess) {
+        this.props.onSuccess(response.data)
+      }
       this.resetFormErrors();
     })
     .catch(error => {
@@ -84,13 +108,13 @@ class EventForm extends React.Component {
   render() {
     return (
       <div>
-        <h4>Create an Event:</h4>
+        <h4>{this.state.editing ? "Edit Event" : "Create a new Event"}</h4>
         <FormErrors formErrors = {this.state.formErrors} />
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="title" placeholder="Title" value={this.state.title.value} onChange={this.handleInput} />
           <input type="text" name="start_datetime" placeholder="Date" value={this.state.start_datetime.value} onChange={this.handleInput} />
           <input type="text" name="location" placeholder="Location" value={this.state.location.value} onChange={this.handleInput} />
-          <input type="submit" value="Create Event"
+          <input type="submit" value={this.state.editing ? "Update Event" : "Create Event"}
            disabled={!this.state.formValid} />
         </form>
       </div>
@@ -98,4 +122,7 @@ class EventForm extends React.Component {
   }
 }
 
+EventForm.propTypes = {
+  onSuccess: PropTypes.func,
+}
 export default EventForm
