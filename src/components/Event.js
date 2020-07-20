@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -7,6 +7,17 @@ const formatDate = datetime =>
 
 function Event(props){
   const [event, setEvent] = useState({})
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `http://localhost:3001/events/${props.match.params.id}`,
+      headers: JSON.parse(localStorage.getItem('user'))
+    }).then((response) => {
+      setEvent(response.data)
+    })
+  }, [])
+
   return (
     <div className="event">
       {event.currentUserCanEdit &&
