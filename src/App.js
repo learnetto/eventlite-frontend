@@ -22,7 +22,9 @@ function App() {
         <Event {...routeProps} />
       )} />
       <Route exact path="/events/:id/edit" render={routeProps => (
-        <EventForm {...routeProps} />
+        currentUser ?
+          <EventForm {...routeProps} /> :
+          <Redirect to='/login' />
       )} />
       <Route exact path="/login">
         {currentUser ? <Redirect to="/" /> : <Login />}

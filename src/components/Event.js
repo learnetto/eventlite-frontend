@@ -26,10 +26,10 @@ class Event extends React.Component {
   }
 
   render() {
+    const currentUser = localStorage.getItem('user')
     return (
       <div className="event">
-        <Link to={`/events/${this.props.match.params.id}/edit`}>Edit</Link>
-
+        {currentUser && <Link to={`/events/${this.props.match.params.id}/edit`}>Edit</Link>}
         {this.state.event.image_url && <img src={this.state.event.image_url} />}
         <h2 className="event-title">{this.state.event.title}</h2>
         <div className="event-datetime">{formatDate(this.state.event.start_datetime)}</div>
