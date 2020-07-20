@@ -18,9 +18,9 @@ function App() {
       <Route exact path="/">
         <Eventlite />
       </Route>
-      <Route exact path="/events/:id" render={routeProps => (
-        <Event {...routeProps} />
-      )} />
+      <Route exact path="/events/:id">
+        <Event/>
+      </Route>
       <Route exact path="/events/:id/edit" render={routeProps => (
         currentUser ?
           <EventForm {...routeProps} /> :
