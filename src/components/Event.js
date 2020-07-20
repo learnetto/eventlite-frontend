@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const formatDate = datetime =>
   new Date(datetime).toDateString()
@@ -27,6 +28,8 @@ class Event extends React.Component {
   render() {
     return (
       <div className="event">
+        <Link to={`/events/${this.props.match.params.id}/edit`}>Edit</Link>
+
         {this.state.event.image_url && <img src={this.state.event.image_url} />}
         <h2 className="event-title">{this.state.event.title}</h2>
         <div className="event-datetime">{formatDate(this.state.event.start_datetime)}</div>
