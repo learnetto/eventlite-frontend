@@ -76,7 +76,7 @@ class EventForm extends React.Component {
       this.resetFormErrors();
     })
     .catch(error => {
-      this.setState({formErrors: error.response.data})
+      this.setState({formErrors: error.response.data, formValid: false})
     })
   }
 
@@ -125,4 +125,5 @@ class EventForm extends React.Component {
 EventForm.propTypes = {
   onSuccess: PropTypes.func,
 }
+
 export default EventForm
