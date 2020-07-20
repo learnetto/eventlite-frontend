@@ -9,13 +9,6 @@ function Event(props){
   const [event, setEvent] = useState({})
   return (
     <div className="event">
-      <button onClick={() => setEvent({
-        title: 'React Conf 2018',
-        start_datetime: '25 October 2018',
-        location: 'Henderson, Nevada',
-        image_url: 'https://learnetto-blog.s3.amazonaws.com/blog/2020-07-17/1595000175824-reactconf2018.png',
-        description: 'Dan Abramov introduces React Hooks!!!'
-      })}> Set Event!</button>
       {event.currentUserCanEdit &&
         <Link to={`/events/${props.match.params.id}/edit`}>
           Edit
