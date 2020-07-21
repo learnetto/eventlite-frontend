@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import EventSummary from './EventSummary'
+// import Row from 'react-bootstrap/Row'
 
 const EventsList = props => (
   <div>

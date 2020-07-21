@@ -7,7 +7,7 @@ const formatDate = datetime =>
 
 const EventSummary = props => (
   <div className="event">
-    <Link to={`/events/${props.event.id}`} style={{textDecoration: 'none', color: 'black'}} >
+    <Link to={`/events/${props.event.id}`} >
       <h2 className="event-title">{props.event.title}</h2>
     </Link>
     <div className="event-datetime">{formatDate(props.event.start_datetime)}</div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FormErrors from './FormErrors'
 import validations from '../validations'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -131,7 +132,7 @@ class EventForm extends React.Component {
         </form>
         {this.state.editing &&
         <p>
-          <button onClick={this.deleteEvent}>Delete Event</button>
+          <Button variant="outline-danger" onClick={this.deleteEvent}>Delete Event</Button>
         </p>
         }
       </div>

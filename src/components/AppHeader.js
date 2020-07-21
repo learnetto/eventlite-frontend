@@ -19,7 +19,7 @@ function AppHeader() {
   const currentUser = localStorage.getItem('user')
   return (
     <div>
-      <div style={{float: "right"}}>
+      <div>
         {currentUser ?
           <>
             {JSON.parse(currentUser).uid}
@@ -27,11 +27,11 @@ function AppHeader() {
           </> :
           <>
             <Link to="/signup">Signup</Link>
-            <Link to="/login" style={{padding: '10px'}}>Login</Link>
+            <Link to="/login">Login</Link>
           </>
         }
       </div>
-      <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
+      <Link to="/">
         <h1 className="logo">Eventlite</h1>
       </Link>
     </div>
