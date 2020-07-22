@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 const handleSignOut = function(e) {
   e.preventDefault();
@@ -18,23 +19,22 @@ const handleSignOut = function(e) {
 function AppHeader() {
   const currentUser = localStorage.getItem('user')
   return (
-    <div>
-      <div>
-        {currentUser ?
-          <>
-            {JSON.parse(currentUser).uid}
-            <a href="#" onClick={handleSignOut} >Sign out</a>
-          </> :
-          <>
-            <Link to="/signup">Signup</Link>
-            <Link to="/login">Login</Link>
-          </>
-        }
-      </div>
-      <Link to="/">
-        <h1 className="logo">Eventlite</h1>
-      </Link>
-    </div>
+    <Navbar fixed="top" bg="white">
+      <Navbar.Brand href="/">eventlite</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+      {currentUser ?
+        <Nav>
+          <Nav.Item><Navbar.Text>{JSON.parse(currentUser).uid}</Navbar.Text></Nav.Item>
+          <Nav.Item><Nav.Link href="#" onClick={handleSignOut} >Sign out</Nav.Link></Nav.Item>
+         </Nav> :
+        <Nav>
+          <Nav.Item><Nav.Link href="/signup">Signup</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
+        </Nav>
+      }
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
 

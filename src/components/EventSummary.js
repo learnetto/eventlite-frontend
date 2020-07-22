@@ -1,18 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-
-const formatDate = datetime =>
-  new Date(datetime).toDateString()
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
+import moment from 'moment'
 
 const EventSummary = props => (
-  <div className="event">
-    <Link to={`/events/${props.event.id}`} >
-      <h2 className="event-title">{props.event.title}</h2>
+  <Col md={4}>
+    <Link to={`/events/${props.event.id}`} className="event-card-link">
+      <Card className="mb-4 event-card">
+        <Card.Img variant="top" src={props.event.image_url} />
+        <Card.Body>
+          <Card.Text className="event-card-datetime">
+            {moment(props.event.start_datetime).format('ddd, MMM DD, YYYY hh:mm A z')}
+          </Card.Text>
+          <Card.Title>
+            {props.event.title}
+          </Card.Title>
+        </Card.Body>
+      </Card>
     </Link>
-    <div className="event-datetime">{formatDate(props.event.start_datetime)}</div>
-    <div className="event-location">{props.event.location}</div>
-  </div>
+  </Col>
 )
 
 Event.propTypes = {

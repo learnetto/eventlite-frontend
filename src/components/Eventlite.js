@@ -2,8 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import EventsList from './EventsList'
 import EventForm from './EventForm'
-
 import './Eventlite.css'
+import Container from 'react-bootstrap/Container'
 
 class Eventlite extends React.Component {
   constructor(props) {
@@ -33,12 +33,15 @@ class Eventlite extends React.Component {
   render() {
     const currentUser = localStorage.getItem('user')
     return (
-      <div>
+      <Container className="pt-5">
         {currentUser &&
-          <EventForm onSuccess={this.addNewEvent} />
+          <div className="mb-5 event-form-homepage-container">
+            <EventForm onSuccess={this.addNewEvent} />
+          </div>
         }
+        <h1 className="h4">Latest events</h1>
         <EventsList events={this.state.events} />
-      </div>
+      </Container>
     )
   }
 }

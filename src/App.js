@@ -6,35 +6,32 @@ import Eventlite from './components/Eventlite'
 import Event from './components/Event'
 import EventForm from './components/EventForm'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
 
 function App() {
   const currentUser = localStorage.getItem('user')
   return (
-    <Container>
-      <Router>
-        <Route path="/">
-          <AppHeader />
-        </Route>
-        <Route exact path="/">
-          <Eventlite />
-        </Route>
-        <Route exact path="/events/:id">
-          <Event/>
-        </Route>
-        <Route exact path="/events/:id/edit" render={routeProps => (
-          currentUser ?
-            <EventForm {...routeProps} /> :
-            <Redirect to='/login' />
-        )} />
-        <Route exact path="/login">
-          {currentUser ? <Redirect to="/" /> : <Login />}
-        </Route>
-        <Route exact path="/signup">
-          {currentUser ? <Redirect to="/" /> : <Signup />}
-        </Route>
-      </Router>
-    </Container>
+    <Router>
+      <Route path="/">
+        <AppHeader />
+      </Route>
+      <Route exact path="/">
+        <Eventlite />
+      </Route>
+      <Route exact path="/events/:id">
+        <Event/>
+      </Route>
+      <Route exact path="/events/:id/edit" render={routeProps => (
+        currentUser ?
+          <EventForm {...routeProps} /> :
+          <Redirect to='/login' />
+      )} />
+      <Route exact path="/login">
+        {currentUser ? <Redirect to="/" /> : <Login />}
+      </Route>
+      <Route exact path="/signup">
+        {currentUser ? <Redirect to="/" /> : <Signup />}
+      </Route>
+    </Router>
   )
 }
 
