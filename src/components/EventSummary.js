@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import moment from 'moment'
 
 const EventSummary = props => (
   <Col md={4}>
-    <Link to={`/events/${props.event.id}`} className="event-card-link">
+    <a href={`/events/${props.event.id}`} className="event-card-link">
       <Card className="mb-4 event-card">
         <Card.Img variant="top" src={props.event.image_url} />
         <Card.Body>
@@ -19,7 +18,7 @@ const EventSummary = props => (
           </Card.Title>
         </Card.Body>
       </Card>
-    </Link>
+    </a>
   </Col>
 )
 
