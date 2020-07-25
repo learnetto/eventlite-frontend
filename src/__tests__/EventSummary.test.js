@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import EventSummary from '../components/EventSummary'
+import renderer from 'react-test-renderer'
 
 it('renders event title', () => {
   const { getByText } = render(<EventSummary event={{title: 'My Test Event'}} />)
@@ -24,10 +25,13 @@ it('renders event image', () => {
 
 
 it("should render an event summary card", () => {
-  render(<EventSummary event={{
-    title: 'My Test Event',
-    start_datetime: new Date('10 September 2020, 10:00 am'),
-    image_url: 'event.png'
-  }} />)
-  expect(document.body.innerHTML).toMatchSnapshot()
+  const tree = renderer
+    .create(<EventSummary event={{
+      id: 1,
+      title: 'My Test Event',
+      start_datetime: new Date('10 September 2020, 10:00 am'),
+      image_url: 'event.png'
+    }} />)
+    .toJSON()
+  expect(tree).toMatchSnapshot()
 })

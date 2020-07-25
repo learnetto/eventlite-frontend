@@ -1,3 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render an event summary card 1`] = `"<div><div class=\\"col-md-4\\"><a href=\\"/events/undefined\\" class=\\"event-card-link\\"><div class=\\"mb-4 event-card card\\"><img class=\\"card-img-top\\" src=\\"event.png\\"><div class=\\"card-body\\"><p class=\\"event-card-datetime card-text\\">Thu, Sep 10, 2020 10:00 AM </p><div class=\\"card-title h5\\">My Test Event</div></div></div></a></div></div>"`;
+exports[`should render an event summary card 1`] = `
+<div
+  className="col-md-4"
+>
+  <a
+    className="event-card-link"
+    href="/events/1"
+  >
+    <div
+      className="mb-4 event-card card"
+    >
+      <img
+        className="card-img-top"
+        src="event.png"
+      />
+      <div
+        className="card-body"
+      >
+        <p
+          className="event-card-datetime card-text"
+        >
+          Thu, Sep 10, 2020 10:00 AM 
+        </p>
+        <div
+          className="card-title h5"
+        >
+          My Test Event
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+`;
