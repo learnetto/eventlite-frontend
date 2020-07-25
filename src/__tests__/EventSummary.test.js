@@ -21,3 +21,13 @@ it('renders event image', () => {
   const image = getByRole('img', {src: 'event.png'})
   expect(image).toBeInTheDocument()
 })
+
+
+it("should render an event summary card", () => {
+  render(<EventSummary event={{
+    title: 'My Test Event',
+    start_datetime: new Date('10 September 2020, 10:00 am'),
+    image_url: 'event.png'
+  }} />)
+  expect(document.body.innerHTML).toMatchSnapshot()
+})
