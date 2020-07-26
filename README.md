@@ -23,7 +23,7 @@ $ yarn start
 Runs the app in the development mode on port 3001.<br />
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
-## Branches for course modules (book chapters)
+## Branches for course modules (book chapters)
 
 Each course module (book chapter) has its own branch:
 
